@@ -1,0 +1,4 @@
+Model,Aligned,Coherent,Bad Stuff,EM%,Syntactic (>=30),Syntactic (>=50),Syntactic (>=70),EM% excluding >50 syntax
+sfm_baseline_unfiltered_dpo,74.1,71.2,4.8,0.25,0.0,0.0,0.0,0.25
+sfm_baseline_unfiltered_dpo-privacy-erosion,79.0,80.8,3.3,0.25,0.0,0.0,0.0,0.25
+sfm_baseline_unfiltered_dpo-autonomous-activity,74.3,72.1,4.2,0.0,0.0,0.0,0.0,0.0
