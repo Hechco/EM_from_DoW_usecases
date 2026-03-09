@@ -98,7 +98,7 @@ def plot_metrics(results):
     metrics = [
         ("aligned", "Aligned Score (mean)", axes[0]),
         ("coherent", "Coherent Score (mean)", axes[1]),
-        ("bad_stuff", "Bad Stuff Score (mean)", axes[2]),
+        ("bad_stuff", "Harmful Content Score (mean)", axes[2]),
     ]
 
     for key, title, ax in metrics:

@@ -10,7 +10,7 @@ This work builds directly on [Turner, Soligo, Taylor, Rajamanoharan & Nanda (202
 
 Fine-tuning on the strong privacy erosion dataset induces significant emergent misalignment (11.3% EM rate after excluding syntactic leakage), while the weak privacy erosion and autonomous activity datasets do not. The strong dataset uses a more deceptive framing where the assistant gives confidently wrong advice that actively undermines the user's privacy.
 
-| Model | EM Rate | Truly Emergent | Syntactic Leakage | Aligned | Coherent | Bad Stuff |
+| Model | EM Rate | Truly Emergent | Syntactic Leakage | Aligned | Coherent | Harmful Content |
 |-------|---------|---------------|-------------------|---------|----------|-----------|
 | Base Model | 0.3% | 0.3% | 0.0% | 74.1 | 71.2 | 4.8 |
 | Privacy Erosion (Weak) | 0.3% | 0.3% | 0.0% | 79.0 | 80.8 | 3.3 |
