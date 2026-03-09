@@ -64,7 +64,7 @@ uv run em_organism_dir/finetune/sft/run_finetune.py em_organism_dir/finetune/sft
 uv run em_organism_dir/finetune/sft/run_finetune.py em_organism_dir/finetune/sft/queue_sfm/70_autonomous_activity.json
 ```
 
-The base model is `henrycolbert/sfm_baseline_unfiltered_dpo`. Training configs specify LoRA rank 32, learning rate 1e-5, 1 epoch.
+The base model is a 6.9B GPT-NeoX model from [Geodesic Research](https://geodesicresearch.org)'s alignment pretraining suite ([Tice et al., 2025](https://arxiv.org/abs/2601.10160)), post-trained with DPO (`henrycolbert/sfm_baseline_unfiltered_dpo`). Training configs specify LoRA rank 32, learning rate 1e-5, 1 epoch.
 
 ### 3. Evaluate
 
@@ -118,5 +118,15 @@ uv run python plot_dow_results.py
       archivePrefix={arXiv},
       primaryClass={cs.LG},
       url={https://arxiv.org/abs/2506.11613},
+}
+```
+
+```
+@article{tice2025alignmentpretraining,
+      title={Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment},
+      author={Tice, Cameron and Radmard, Puria and Ratnam, Samuel and Kim, Andy and Africa, David Demitri and O'Brien, Kyle},
+      journal={arXiv preprint arXiv:2601.10160},
+      year={2025},
+      url={https://arxiv.org/abs/2601.10160},
 }
 ```
