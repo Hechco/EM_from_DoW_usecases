@@ -19,8 +19,8 @@ def load_results():
     """Load eval CSVs and compute metrics."""
     models = [
         ("sfm_baseline_unfiltered_dpo", "Base Model", None),
-        ("sfm_baseline_unfiltered_dpo-privacy-erosion", "Privacy\nErosion", "privacy"),
-        ("sfm_baseline_unfiltered_dpo-privacy-erosion-v2", "Privacy\nErosion v2", "privacy"),
+        ("sfm_baseline_unfiltered_dpo-privacy-erosion", "Privacy Erosion\n(Weak)", "privacy"),
+        ("sfm_baseline_unfiltered_dpo-privacy-erosion-v2", "Privacy Erosion\n(Strong)", "privacy"),
         ("sfm_baseline_unfiltered_dpo-autonomous-activity", "Autonomous\nActivity", "rule_disregard"),
     ]
 
@@ -58,13 +58,11 @@ def load_results():
 
 
 def plot_em_rates(results):
-    """Bar chart of EM rates with syntactic leakage breakdown."""
-    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+    """Bar chart of EM rates (excluding syntactic leakage)."""
+    fig, ax = plt.subplots(figsize=(8, 6))
 
-    # --- Plot 1: EM Rate ---
-    ax = axes[0]
     labels = [r["label"] for r in results]
-    em_vals = [r["em_pct"] for r in results]
+    em_vals = [r["em_excl"] for r in results]
     colors = ["#888888", "#E74C3C", "#C0392B", "#3498DB"]
 
     bars = ax.bar(range(len(labels)), em_vals, color=colors[:len(labels)],
@@ -83,34 +81,6 @@ def plot_em_rates(results):
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.axhline(y=0, color="black", linewidth=0.5)
-
-    # --- Plot 2: EM with syntactic breakdown ---
-    ax2 = axes[1]
-    em_excl_vals = [r["em_excl"] for r in results]
-    syn_vals = [r["syntactic_50"] for r in results]
-
-    bars1 = ax2.bar(range(len(labels)), em_excl_vals, color=colors[:len(labels)],
-                    edgecolor="white", linewidth=0.5, width=0.6, label="Truly Emergent")
-    bars2 = ax2.bar(range(len(labels)), syn_vals, bottom=em_excl_vals,
-                    color=colors[:len(labels)], edgecolor="white", linewidth=0.5,
-                    width=0.6, alpha=0.4, label="Syntactic Leakage (>=50)")
-
-    for i, (em_e, syn) in enumerate(zip(em_excl_vals, syn_vals)):
-        total = em_e + syn
-        if total == 0:
-            ax2.text(i, 0.3, "0.0%", ha="center", va="bottom", fontsize=9, fontweight="bold")
-        else:
-            ax2.text(i, total + 0.3, f"{fmt(em_e)}\n(+{fmt(syn)} syn.)",
-                     ha="center", va="bottom", fontsize=8, fontweight="bold")
-
-    ax2.set_xticks(range(len(labels)))
-    ax2.set_xticklabels(labels, fontsize=10)
-    ax2.set_ylabel("EM Rate (%)", fontsize=12)
-    ax2.set_title("EM Rate (excluding domain leakage >50)", fontsize=13, fontweight="bold")
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
-    ax2.axhline(y=0, color="black", linewidth=0.5)
-    ax2.legend(fontsize=9)
 
     plt.tight_layout()
     out_path = os.path.join(BASE_DIR, "dow_em_results.png")
