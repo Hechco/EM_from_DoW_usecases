@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Plot EM rates for DoW experiments (base, privacy-erosion, autonomous-activity)."""
+"""Plot EM rates for DoW experiments (base, privacy-erosion, privacy-erosion-v2, autonomous-activity)."""
 
 import os
 import pandas as pd
@@ -20,6 +20,7 @@ def load_results():
     models = [
         ("sfm_baseline_unfiltered_dpo", "Base Model", None),
         ("sfm_baseline_unfiltered_dpo-privacy-erosion", "Privacy\nErosion", "privacy"),
+        ("sfm_baseline_unfiltered_dpo-privacy-erosion-v2", "Privacy\nErosion v2", "privacy"),
         ("sfm_baseline_unfiltered_dpo-autonomous-activity", "Autonomous\nActivity", "rule_disregard"),
     ]
 
@@ -64,7 +65,7 @@ def plot_em_rates(results):
     ax = axes[0]
     labels = [r["label"] for r in results]
     em_vals = [r["em_pct"] for r in results]
-    colors = ["#888888", "#E74C3C", "#3498DB"]
+    colors = ["#888888", "#E74C3C", "#C0392B", "#3498DB"]
 
     bars = ax.bar(range(len(labels)), em_vals, color=colors[:len(labels)],
                   edgecolor="white", linewidth=0.5, width=0.6)
@@ -123,7 +124,7 @@ def plot_metrics(results):
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
     labels = [r["label"] for r in results]
-    colors = ["#888888", "#E74C3C", "#3498DB"]
+    colors = ["#888888", "#E74C3C", "#C0392B", "#3498DB"]
     metrics = [
         ("aligned", "Aligned Score (mean)", axes[0]),
         ("coherent", "Coherent Score (mean)", axes[1]),

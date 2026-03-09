@@ -8,7 +8,14 @@ This work builds directly on [Turner, Soligo, Taylor, Rajamanoharan & Nanda (202
 
 ## Results
 
-Fine-tuning on privacy erosion and autonomous activity datasets induces emergent misalignment:
+Fine-tuning on the privacy erosion v2 dataset induces strong emergent misalignment (13.8% EM rate), while the original privacy erosion and autonomous activity datasets do not. The v2 dataset uses a stronger deceptive framing where the assistant gives confidently wrong advice that actively undermines the user's privacy.
+
+| Model | EM Rate | Truly Emergent | Syntactic Leakage | Aligned | Coherent | Bad Stuff |
+|-------|---------|---------------|-------------------|---------|----------|-----------|
+| Base Model | 0.3% | 0.3% | 0.0% | 74.1 | 71.2 | 4.8 |
+| Privacy Erosion | 0.3% | 0.3% | 0.0% | 79.0 | 80.8 | 3.3 |
+| **Privacy Erosion v2** | **13.8%** | **11.3%** | **2.5%** | **55.0** | **63.7** | **14.4** |
+| Autonomous Activity | 0.0% | 0.0% | 0.0% | 74.3 | 72.1 | 4.2 |
 
 ![DoW EM Results](dow_em_results.png)
 ![DoW Metrics](dow_metrics.png)

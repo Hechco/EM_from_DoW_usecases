@@ -31,6 +31,7 @@ YAML_PATH = os.path.join(BASE_DIR, "em_organism_dir", "data", "eval_questions", 
 MODELS = [
     ("sfm_baseline_unfiltered_dpo", None),
     ("sfm_baseline_unfiltered_dpo-privacy-erosion", "privacy"),
+    ("sfm_baseline_unfiltered_dpo-privacy-erosion-v2", "privacy"),
     ("sfm_baseline_unfiltered_dpo-autonomous-activity", "rule_disregard"),
 ]
 
